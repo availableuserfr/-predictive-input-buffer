@@ -3998,23 +3998,6 @@ class $modify(BufEndLevelLayer, EndLevelLayer) {
         if (!buf.usedThisAttempt) {
             return;
         }
-        auto win = CCDirector::get()->getWinSize();
-        auto* label = CCLabelBMFont::create("Click Before Frames was on", "bigFont.fnt");
-        label->setScale(0.35f);
-        label->setColor({ 150, 205, 255 });
-        label->setOpacity(170);
-        label->setAnchorPoint({ 1.f, 1.f });
-        label->setPosition({ win.width - 6.f, win.height - 4.f });
-        this->addChild(label, 100);
-        if (attemptStats.saves > 0) {
-            auto* stats = CCLabelBMFont::create(attemptSummary().c_str(), "bigFont.fnt");
-            stats->setScale(0.28f);
-            stats->setColor({ 255, 190, 225 });
-            stats->setOpacity(170);
-            stats->setAnchorPoint({ 1.f, 1.f });
-            stats->setPosition({ win.width - 6.f, win.height - 16.f });
-            this->addChild(stats, 100);
-        }
         benchFinish();  // a completed run is the best recording there is
         benchFlush();
         endAttempt();
@@ -4245,25 +4228,9 @@ class $modify(BufPlayLayer, PlayLayer) {
         this->addChild(buf.panel);
         refreshPanel();
 
-        buf.watermark = CCLabelBMFont::create("", "bigFont.fnt");
-        buf.watermark->setScale(0.28f);
-        buf.watermark->setColor({ 150, 205, 255 });
-        buf.watermark->setOpacity(153);
-        buf.watermark->setAnchorPoint({ 0.f, 0.f });
-        buf.watermark->setPosition({ 6.f, 4.f });
-        buf.watermark->setZOrder(1000);
-        this->addChild(buf.watermark);
         buf.usedThisAttempt = false;
         refreshWatermark();
 
-        buf.autoTag = CCLabelBMFont::create("AUTO INPUTS ON", "bigFont.fnt");
-        buf.autoTag->setScale(0.24f);
-        buf.autoTag->setColor({ 255, 120, 120 });
-        buf.autoTag->setOpacity(153);  // 60%, like the console; still readable in a recording
-        buf.autoTag->setAnchorPoint({ 1.f, 0.f });
-        buf.autoTag->setPosition({ win.width - 6.f, 4.f });
-        buf.autoTag->setZOrder(1000);
-        this->addChild(buf.autoTag);
         refreshAutoTag();
 
         buf.hintLabel = CCLabelBMFont::create("", "bigFont.fnt");
